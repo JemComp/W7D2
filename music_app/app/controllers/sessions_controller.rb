@@ -17,7 +17,9 @@ class SessionsController < ApplicationController
     end
 
     def destroy
+        debugger
         logout!
+        redirect_to new_session_url
     end
 
 
