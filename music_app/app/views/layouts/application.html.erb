@@ -10,21 +10,29 @@
   </head>
 
   <body>
-    <% if logged_in?%>
-    <h1> MUSIC APP</h1>
-      <h3>Welcome <%= current_user.email%></h3>
-      <form action='<%=session_url%>' value="POST" >
-        <input type='hidden' name='_method' value='delete'>
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <h1 class="header"> 
 
-        <input type='submit' value='Log Out'>
-      </form>
+      <div></div>
+      MUSIC APP
+      
+      <div id=login_info>
+        <% if logged_in?%>
+          <p>Welcome <%= current_user.email%></p>
+          <form action='<%=session_url%>' method="POST" >
+            <input type='hidden' name='_method' value='delete'>
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-    <%else%>
-      <a href="<%=users_url%>" >New account</a>
-      <br>
-      <a href="<%new_session_url%>">Log in</a>
-    <%end%>
+            <input type='submit' value='Log Out'>
+          </form>
+        
+
+          <%else%>
+            <a href="<%=new_user_url%>" >New account</a>
+            <br>
+            <a href="<%new_session_url%>">Log in</a>
+          <%end%>
+      </div>
+    </h1>
 
     <%= yield %>
   </body>

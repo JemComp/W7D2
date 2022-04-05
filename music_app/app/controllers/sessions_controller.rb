@@ -6,9 +6,10 @@ class SessionsController < ApplicationController
 
     
     def create
-        @user = User.find_by_credentials(params[user][email],params[user][password])
-        if user
-            login!(current_user)
+        @user = User.find_by_credentials(params[:user][:email],params[:user][:password])
+        if @user
+            login!(@user)
+            redirect_to user_url(@user)
         else
             flash.now[:errors] = ["Incorrent email/password"]
             render :new
@@ -17,7 +18,6 @@ class SessionsController < ApplicationController
     end
 
     def destroy
-        debugger
         logout!
         redirect_to new_session_url
     end
