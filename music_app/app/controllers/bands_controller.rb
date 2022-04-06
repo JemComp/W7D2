@@ -25,16 +25,17 @@ class BandsController < ApplicationController
     end
 
     def show
-        @band = Band.find_by(:id [params[:id]])
+        @band = Band.find(params[:id])
         render :show
     end
 
     def update
         @band = Band.find_by(:id [params[:id]])
         if @band && @band.update_atributes(band_params)
-            redirect_to bands_url
+            redirect_to band_url(@band)
         else
             flash.now[:errors] = @band.errors.full_messages
+            render :edit
         end
     end
 
